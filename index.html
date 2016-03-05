@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>leaf</title>
+	<style>
+	img{
+		position: absolute;
+	}
+	</style>
+</head>
+<body>
+	
+</body>
+<script>
+	function Leaf(){
+		this.width=parseInt(Math.random()*20+190);
+		this.speed=parseInt(Math.random()*10+10);
+		this.pos={
+			left:parseInt(Math.random()*document.documentElement.clientWidth-this.width),
+			top:0
+		}
+		this.fallTime=parseInt(Math.random()*1200)+100;
+		this.oImg=new Image();
+		this.oImg.src='img/'+(parseInt(Math.random()*4)+1)+'.jpg';
+		this.oImg.style.width=this.width+'px';
+		this.oImg.style.left=this.pos.left+'px';
+		this.oImg.style.top=this.pos.top;
+		document.body.appendChild(this.oImg);
+	}
+
+	Leaf.prototype.leafFall=function(){
+		var that=this;
+		setInterval(function(){
+				that.oImg.style.top=that.oImg.offsetTop+10+'px';
+		},this.speed);
+	
+	}
+	for(var i=0;i<4;i++){
+		var leaves = new Leaf();
+		(function(leaf){
+			setTimeout(function(){
+				
+				leaf.leafFall();
+			
+			},leaf.fallTime);
+		})(leaves);
+	}
+</script>
+</html>
